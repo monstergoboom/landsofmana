@@ -1,11 +1,11 @@
 package com.lom.game.cards.leaders;
 
-import com.lom.game.cards.Leader;
+import com.lom.game.cards.LeaderCard;
 
 /**
  * Created by Alek on 2/26/2016.
  */
-public class FireApprentice extends Leader {
+public class FireApprentice extends LeaderCard {
     public FireApprentice() {
         setName("FireApprentice");
         setFaction("WizardsTower");

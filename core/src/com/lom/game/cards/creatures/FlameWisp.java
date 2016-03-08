@@ -1,11 +1,11 @@
 package com.lom.game.cards.creatures;
 
-import com.lom.game.cards.Creature;
+import com.lom.game.cards.CreatureCard;
 
 /**
  * Created by Alek on 2/26/2016.
  */
-public class FlameWisp extends Creature {
+public class FlameWisp extends CreatureCard {
     public FlameWisp() {
         setName("FlameWisp");
         setFaction("None");

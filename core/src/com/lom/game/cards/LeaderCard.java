@@ -4,7 +4,7 @@ import java.util.HashMap;
 /**
  * Created by Alek on 2/25/2016.
  */
-public class Leader extends BaseCard {
+public class LeaderCard extends BaseCard {
     private String faction;
     private int health;
     private int mana;
@@ -13,7 +13,7 @@ public class Leader extends BaseCard {
 
     private HashMap<String, Integer> proficiency;
 
-    public Leader() {
+    public LeaderCard() {
         this.faction = "None";
         this.health = 0;
         this.mana = 0;

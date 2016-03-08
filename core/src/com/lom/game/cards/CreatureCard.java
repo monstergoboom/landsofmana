@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * Created by Alek on 2/25/2016.
  */
-public class Creature extends BaseCard {
+public class CreatureCard extends BaseCard {
     private String faction;
     private String family;
     private String profession;
@@ -16,7 +16,7 @@ public class Creature extends BaseCard {
     private int attack;
     private HashMap<String, Integer> subTypeLevel;
 
-    public Creature() {
+    public CreatureCard() {
         this.faction = "None";
         this.family = "None";
         this.profession = "None";
