@@ -1,6 +1,6 @@
 apply plugin: "java"
 
-sourceCompatibility = 1.6
+sourceCompatibility = JavaVersion.VERSION_1_7
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 project.ext.mainClassName = "com.lom.game.desktop.DesktopLauncher"
@@ -46,5 +46,4 @@ task afterEclipseImport(description: "Post processing after project generation",
 }
 
 dependencies {
-    compile 'com.firebase:firebase-client-jvm:2.5.2'
 }

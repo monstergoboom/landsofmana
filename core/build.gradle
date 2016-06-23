@@ -1,12 +1,12 @@
 apply plugin: "java"
-sourceCompatibility = 1.6
+
+sourceCompatibility = 1.7
+
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceSets.main.java.srcDirs = ["src/"]
 eclipse.project {
     name = appName + "-core"
 }
+
 dependencies {
-    runtime 'com.firebase:firebase-client-parent:2.5.2'
-    compile 'com.firebase:firebase-client-jvm:2.5.2'
-    compile 'com.firebase:firebase-token-generator:2.0.0'
 }

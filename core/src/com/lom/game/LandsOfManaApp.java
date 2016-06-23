@@ -2,54 +2,89 @@ package com.lom.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.firebase.client.AuthData;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.security.token.TokenGenerator;
-import com.firebase.security.token.TokenOptions;
-
-import java.util.HashMap;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import java.util.Map;
 
 public class LandsOfManaApp extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
-	Firebase firebase;
+	ShapeRenderer shapeRenderer;
+	int width, height;
+	FrameBuffer gridFrameBuffer = null;
+	TextureRegion gridTextureRegion = null;
+	float gridScalar = 1.5f;
+	float gridWidth, gridHeight;
+	boolean gridEnabled;
+	TextArea txtAreaWindow;
+	ScrollPane outputWindowScrollPane;
+	Window outputWindow;
+	Stage stage;
+	float defaultOutputWindowHeight = 200;
+
+	public LandsOfManaApp() {
+		super();
+		gridEnabled = true;
+	}
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("card_base_red.png");
 
-		firebase = new Firebase("https://lom.firebaseio.com/users/1234567890");
+		shapeRenderer = new ShapeRenderer();
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 
-		Map<String, Object> auth = new HashMap<String, Object>();
-		auth.put("uid", "1234567890");
+		gridWidth = 25;
+		gridHeight = 25;
+	}
 
-		TokenOptions tokenOptions = new TokenOptions();
-		tokenOptions.setAdmin(true);
+	public void drawGrid() {
+		if (gridFrameBuffer == null) {
+			gridFrameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (width * gridScalar),
+					(int) (height * gridScalar), false);
+			gridTextureRegion = new TextureRegion(gridFrameBuffer.getColorBufferTexture());
+			gridTextureRegion.flip(false, true);
 
-		TokenGenerator tokenGenerator = new TokenGenerator("MzDIYLhTX8MSKQuSRkfIe5p2rJQDZjj1sUQwbTv3");
-		String token = tokenGenerator.createToken(auth);
+			gridFrameBuffer.begin();
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		System.out.println("token: " + token);
+			shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+			shapeRenderer.setColor(.2f, .1f, .2f, 1);
 
-		firebase.authWithCustomToken(token, new Firebase.AuthResultHandler() {
-			@Override
-			public void onAuthenticated(AuthData authData) {
-				System.out.println("authenticated");
+			float x = 0, y = 0, dx = 0, dy = height;
 
-				firebase.child("doc_1").setValue("this is a test");
+			for (int index_x = 0; index_x <= width; index_x += gridWidth) {
+				x = dx = index_x;
+				shapeRenderer.line(x, y, dx, dy);
 			}
 
-			@Override
-			public void onAuthenticationError(FirebaseError firebaseError) {
-				System.out.println("unable to authenticate: " + firebaseError.getMessage());
+			x = 0;
+			y = 0;
+			dx = width;
+			dy = 0;
+
+			for (int index_y = 0; index_y <= height; index_y += gridHeight) {
+				y = dy = index_y;
+				shapeRenderer.line(x, y, dx, dy);
 			}
-		});
+
+			shapeRenderer.end();
+			gridFrameBuffer.end();
+		}
 	}
 
 	@Override
@@ -57,8 +92,12 @@ public class LandsOfManaApp extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		drawGrid();
+
 		batch.begin();
-		batch.draw(img, 0, 0);
+		if (gridEnabled) batch.draw(gridTextureRegion, 0, 0, width, height);
+		batch.draw(img, 100, 200);
 		batch.end();
 	}
 }
+
