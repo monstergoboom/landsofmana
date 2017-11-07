@@ -18,6 +18,8 @@ public class DesktopLauncher {
         config.title = "Lands of Mana";
 		config.initialBackgroundColor = new com.badlogic.gdx.graphics.Color(0,0,0,0);
 
-		new LwjglApplication(new LandsOfManaApp(), config);
+		SqLiteDesktopDbProvider dbProvider = new SqLiteDesktopDbProvider();
+
+		new LwjglApplication(new LandsOfManaApp(dbProvider), config);
 	}
 }
