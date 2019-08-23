@@ -1,14 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-<<<<<<< HEAD
     buildToolsVersion "29.0.0"
     compileSdkVersion 29
-=======
-    buildToolsVersion '27.0.1'
-    compileSdkVersion 26
->>>>>>> d86bc195c467f4166b7de0f27403bfecc13061ff
-
 
     sourceSets {
         main {
@@ -137,10 +131,4 @@ idea {
 }
 
 dependencies {
-<<<<<<< HEAD
 }
-=======
-}
-
-apply plugin: 'com.google.gms.google-services'
->>>>>>> d86bc195c467f4166b7de0f27403bfecc13061ff
