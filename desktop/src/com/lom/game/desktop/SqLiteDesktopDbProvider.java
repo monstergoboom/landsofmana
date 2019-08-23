@@ -1,16 +1,20 @@
-package com.lom.game.db;
+package com.lom.game.desktop;
 
+import com.lom.game.db.DbProvider;
 
 /**
- * Created by Alek on 6/22/2016.
+ * Created by amitrevski on 1/14/17.
  */
-public class BangDbProvider implements DbProvider {
+
+public class SqLiteDesktopDbProvider implements DbProvider {
     @Override
     public void create(String configuration) {
+
     }
 
     @Override
     public void set(String payload) {
+
     }
 
     @Override

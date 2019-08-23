@@ -2,7 +2,6 @@ package com.lom.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,11 +11,10 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import java.util.Map;
+import com.lom.game.db.DbProvider;
+
 
 public class LandsOfManaApp extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -33,10 +31,12 @@ public class LandsOfManaApp extends ApplicationAdapter {
 	Window outputWindow;
 	Stage stage;
 	float defaultOutputWindowHeight = 200;
+	DbProvider dbProvider;
 
-	public LandsOfManaApp() {
+	public LandsOfManaApp(DbProvider db) {
 		super();
 		gridEnabled = true;
+		dbProvider = db;
 	}
 
 	@Override

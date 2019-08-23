@@ -1,8 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
+<<<<<<< HEAD
     buildToolsVersion "29.0.0"
     compileSdkVersion 29
+=======
+    buildToolsVersion '27.0.1'
+    compileSdkVersion 26
+>>>>>>> d86bc195c467f4166b7de0f27403bfecc13061ff
 
 
     sourceSets {
@@ -36,11 +41,11 @@ android {
 // the natives configuration, and extracts them to the proper libs/ folders
 // so they get packed with the APK.
 task copyAndroidNatives() {
-    file("libs/armeabi/").mkdirs();
-    file("libs/armeabi-v7a/").mkdirs();
-    file("libs/arm64-v8a/").mkdirs();
-    file("libs/x86_64/").mkdirs();
-    file("libs/x86/").mkdirs();
+    file("libs/armeabi/").mkdirs()
+    file("libs/armeabi-v7a/").mkdirs()
+    file("libs/arm64-v8a/").mkdirs()
+    file("libs/x86_64/").mkdirs()
+    file("libs/x86/").mkdirs()
 
     configurations.natives.files.each { jar ->
         def outputDir = null
@@ -118,8 +123,8 @@ idea {
         iml {
             withXml {
                 def node = it.asNode()
-                def builder = NodeBuilder.newInstance();
-                builder.current = node;
+                def builder = NodeBuilder.newInstance()
+                builder.current = node
                 builder.component(name: "FacetManager") {
                     facet(type: "android", name: "Android") {
                             configuration { option(name: "UPDATE_PROPERTY_FILES" , value:"true")
@@ -132,4 +137,10 @@ idea {
 }
 
 dependencies {
+<<<<<<< HEAD
 }
+=======
+}
+
+apply plugin: 'com.google.gms.google-services'
+>>>>>>> d86bc195c467f4166b7de0f27403bfecc13061ff
